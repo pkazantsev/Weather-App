@@ -13,6 +13,11 @@ typealias WeatherApiKey = String
 
 private let openWeatherMapSrv = URL(string: "http://api.openweathermap.org")!
 private let weatherPath = "/data/2.5/weather"
+private let conditionImageUrl = "http://openweathermap.org/img/w/{imageCode}.png"
+
+enum WeatherAPIError: Error {
+    case incorrectWeatherImageCode
+}
 
 private enum Endpoints {
     case byCityName(cityName: String, countryCode: String?)
@@ -79,6 +84,14 @@ final class WeatherAPI {
         return network
             .fetchJson(from: url)
             .then { try Weather(object: $0) }
+    }
+
+    func loadConditionsImage(withName imageName: String) -> Promise<UIImage> {
+        guard let url = URL(string: conditionImageUrl.replacingOccurrences(of: "{imageCode}", with: imageName)) else {
+            return Promise(error: WeatherAPIError.incorrectWeatherImageCode)
+        }
+        return network
+            .loadImage(from: url)
     }
 
 }

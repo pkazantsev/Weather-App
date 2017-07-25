@@ -20,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         api = WeatherAPI(network: NetworkHelperImpl(), apiKey: openWeatherMapKey)
 
+        if let rootVc = window?.rootViewController as? ViewController {
+            let viewModel = MainViewModel(api: api)
+            rootVc.viewModel = viewModel
+        }
+
         return true
     }
 

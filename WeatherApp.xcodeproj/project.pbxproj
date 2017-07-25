@@ -22,6 +22,9 @@
 		C846C67D1F26E7B800C38A03 /* Marshal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C846C6751F26E76F00C38A03 /* Marshal.framework */; };
 		C846C67E1F26E7B800C38A03 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C846C6761F26E76F00C38A03 /* PromiseKit.framework */; };
 		C846C6811F26E7B800C38A03 /* Hamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C846C6801F26E7B800C38A03 /* Hamcrest.framework */; };
+		C846C6861F27059F00C38A03 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6821F27059F00C38A03 /* Helpers.swift */; };
+		C846C6871F27059F00C38A03 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6831F27059F00C38A03 /* MainViewModel.swift */; };
+		C846C6881F27059F00C38A03 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6851F27059F00C38A03 /* MainView.swift */; };
 		C849B50A1F17138D00BC7835 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849B5091F17138D00BC7835 /* AppDelegate.swift */; };
 		C849B50C1F17138D00BC7835 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849B50B1F17138D00BC7835 /* ViewController.swift */; };
 		C849B50F1F17138D00BC7835 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C849B50D1F17138D00BC7835 /* Main.storyboard */; };
@@ -66,6 +69,9 @@
 		C846C6751F26E76F00C38A03 /* Marshal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Marshal.framework; path = ../Carthage/Build/iOS/Marshal.framework; sourceTree = "<group>"; };
 		C846C6761F26E76F00C38A03 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = ../Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		C846C6801F26E7B800C38A03 /* Hamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hamcrest.framework; path = Carthage/Build/iOS/Hamcrest.framework; sourceTree = "<group>"; };
+		C846C6821F27059F00C38A03 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		C846C6831F27059F00C38A03 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		C846C6851F27059F00C38A03 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C849B5061F17138D00BC7835 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C849B5091F17138D00BC7835 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C849B50B1F17138D00BC7835 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +150,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C846C6841F27059F00C38A03 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C846C6851F27059F00C38A03 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C849B4FD1F17138D00BC7835 = {
 			isa = PBXGroup;
 			children = (
@@ -192,8 +206,11 @@
 			children = (
 				C846C6621F26550B00C38A03 /* Model */,
 				C846C6641F26550B00C38A03 /* Service */,
+				C846C6841F27059F00C38A03 /* Views */,
 				C849B5091F17138D00BC7835 /* AppDelegate.swift */,
 				C849B50B1F17138D00BC7835 /* ViewController.swift */,
+				C846C6821F27059F00C38A03 /* Helpers.swift */,
+				C846C6831F27059F00C38A03 /* MainViewModel.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -303,7 +320,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C846C6871F27059F00C38A03 /* MainViewModel.swift in Sources */,
+				C846C6881F27059F00C38A03 /* MainView.swift in Sources */,
 				C846C6691F26550B00C38A03 /* Network.swift in Sources */,
+				C846C6861F27059F00C38A03 /* Helpers.swift in Sources */,
 				C849B50C1F17138D00BC7835 /* ViewController.swift in Sources */,
 				C846C6671F26550B00C38A03 /* Weather.swift in Sources */,
 				C846C6681F26550B00C38A03 /* API.swift in Sources */,

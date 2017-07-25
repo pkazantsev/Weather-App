@@ -9,6 +9,11 @@
 import Foundation
 import Marshal
 
+struct Coordinates {
+    let latitude: Double
+    let longitude: Double
+}
+
 struct Weather {
     /// General weather conditions
     struct Conditions {
@@ -28,11 +33,6 @@ struct Weather {
     struct Wind {
         let speed: Double
         let direction: Double
-    }
-
-    struct Coordinates {
-        let latitude: Double
-        let longitude: Double
     }
 
     let cityName: String
@@ -83,7 +83,7 @@ extension Weather.Wind: Unmarshaling {
     }
 }
 
-extension Weather.Coordinates: Unmarshaling {
+extension Coordinates: Unmarshaling {
     init(object: MarshaledObject) throws {
         latitude = try object.value(for: "lat")
         longitude = try object.value(for: "lon")

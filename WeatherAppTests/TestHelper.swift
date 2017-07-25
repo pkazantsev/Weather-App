@@ -102,4 +102,8 @@ class TestsNetworkHelper: NetworkHelper {
             callback(data)
         }
     }
+
+    func loadImage(from url: URL) -> Promise<UIImage> {
+        return Promise(error: "Not Implemented Yet")
+    }
 }

@@ -6,26 +6,96 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="HlZ-ek-SbL">
             <objects>
-                <viewController id="e7e-80-ygt" sceneMemberID="viewController">
+                <viewController id="e7e-80-ygt" customClass="ViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JPj-du-6Cu"/>
                         <viewControllerLayoutGuide type="bottom" id="c9S-7s-mEY"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dbr-DP-KPJ">
+                    <view key="view" contentMode="scaleToFill" id="dbr-DP-KPJ" customClass="MainView" customModule="WeatherApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a city name or zip code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EV4-Uv-HCc">
+                                <rect key="frame" x="56.5" y="28" width="262.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="48°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avS-WY-q3I" userLabel="Temperature Label">
+                                <rect key="frame" x="170.5" y="140" width="188.5" height="153"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="128"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="DhI-DS-fpl">
+                                <rect key="frame" x="16" y="165.5" width="139" height="96.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RU9-WU-aiI" userLabel="Wind Direction Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="39.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind Speed Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfk-AF-RsG" userLabel="Wind Speed Label">
+                                        <rect key="frame" x="0.0" y="22" width="139" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="48Y-5p-H0O" userLabel="Weather Indicator Image">
+                                        <rect key="frame" x="0.0" y="46.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="TZR-UI-Tvs"/>
+                                            <constraint firstAttribute="height" constant="50" id="sBt-5v-UGM"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaT-cq-J5N" userLabel="Location Label">
+                                <rect key="frame" x="20" y="103" width="335" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="avS-WY-q3I" firstAttribute="top" secondItem="gaT-cq-J5N" secondAttribute="bottom" constant="8" id="1A8-DV-CiQ"/>
+                            <constraint firstItem="avS-WY-q3I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DhI-DS-fpl" secondAttribute="trailing" constant="8" id="5Vk-kE-a3F"/>
+                            <constraint firstItem="EV4-Uv-HCc" firstAttribute="top" secondItem="JPj-du-6Cu" secondAttribute="bottom" constant="8" id="AIP-kD-clS"/>
+                            <constraint firstItem="gaT-cq-J5N" firstAttribute="leading" secondItem="dbr-DP-KPJ" secondAttribute="leading" constant="20" symbolic="YES" id="Jmf-VL-3WV"/>
+                            <constraint firstItem="avS-WY-q3I" firstAttribute="top" secondItem="JPj-du-6Cu" secondAttribute="bottom" constant="120" id="LOq-rd-1ry"/>
+                            <constraint firstItem="EV4-Uv-HCc" firstAttribute="width" secondItem="dbr-DP-KPJ" secondAttribute="width" multiplier="0.7" id="Lc0-2q-hgT"/>
+                            <constraint firstItem="EV4-Uv-HCc" firstAttribute="centerX" secondItem="dbr-DP-KPJ" secondAttribute="centerX" id="RdI-Na-SqI"/>
+                            <constraint firstItem="DhI-DS-fpl" firstAttribute="leading" secondItem="dbr-DP-KPJ" secondAttribute="leadingMargin" id="S7R-za-zPg"/>
+                            <constraint firstAttribute="trailing" secondItem="gaT-cq-J5N" secondAttribute="trailing" constant="20" symbolic="YES" id="VpZ-pV-mUe"/>
+                            <constraint firstItem="avS-WY-q3I" firstAttribute="trailing" secondItem="dbr-DP-KPJ" secondAttribute="trailingMargin" id="a2w-I8-oLy"/>
+                            <constraint firstItem="avS-WY-q3I" firstAttribute="firstBaseline" secondItem="DhI-DS-fpl" secondAttribute="baseline" id="lF8-v8-OqY"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="conditionsImageView" destination="48Y-5p-H0O" id="CEH-eT-WKG"/>
+                            <outlet property="locationLabel" destination="gaT-cq-J5N" id="etU-i2-Deh"/>
+                            <outlet property="temperatureLabel" destination="avS-WY-q3I" id="QE5-j6-iQ4"/>
+                            <outlet property="windSpeedLabel" destination="mfk-AF-RsG" id="Z0B-JC-fea"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="mainView" destination="dbr-DP-KPJ" id="vs5-f0-djw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bif-2V-7In" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="188"/>
+            <point key="canvasLocation" x="-292" y="187.55622188905548"/>
         </scene>
     </scenes>
 </document>
