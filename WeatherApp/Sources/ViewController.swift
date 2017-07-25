@@ -31,18 +31,22 @@ class ViewController: UIViewController {
         // In case we need to request permission
         locationDelectionToken = viewModel.detectUserLocation(locationDetectedCallback: { [weak self] location in
             print("Location detected: \(location)")
-            guard let vc = self else { return }
+            self?.locationDetected(location)
 
-            vc.viewModel.userLocation = location
-            vc.mainView.currentLocationButton?.isEnabled = true
-            vc.locationDelectionToken = nil
-            if vc.userLocationEnabled {
-                vc.fetchViewModel(for: .currentLocation)
-            }
+
         }) { [weak self] error in
             dlog("Location detection error: \(error)")
             // Present the error to ther user
             self?.locationDelectionToken = nil
+        }
+    }
+
+    private func locationDetected(_ location: UserLocation) {
+        viewModel.userLocation = location
+        mainView.currentLocationButton?.isEnabled = true
+        locationDelectionToken = nil
+        if userLocationEnabled {
+            fetchViewModel(for: .currentLocation)
         }
     }
 
@@ -54,8 +58,7 @@ class ViewController: UIViewController {
         viewModel.weatherViewModel(for: mode)
             .then { weatherViewModel -> Void in
                 dlog("Weather fetched: \(weatherViewModel)")
-                self.mainView.viewModel = weatherViewModel
-                self.viewModel.countryCode = weatherViewModel.countryCode.lowercased()
+                self.updateWith(viewModel: weatherViewModel)
             }.catch { error in
                 dlog("Weather fetching error: \(error)")
                 if let err = error as? WeatherAPIError, case .cityNotFound = err {
@@ -64,12 +67,35 @@ class ViewController: UIViewController {
             }
     }
 
+    private func updateWith(viewModel vm: WeatherViewModel) {
+        mainView.viewModel = vm
+        viewModel.countryCode = vm.countryCode.lowercased()
+        viewModel.lastSearchedLocation = vm.locationDetails
+    }
+
     private func showError(title: String? = nil, message: String? = nil) {
         let alert = UIAlertController(title: "Error", message: "City not found", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
 
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "OpenMapScreenIdentifier",
+            let navVC = segue.destination as? UINavigationController,
+            let mapVC = navVC.topViewController as? MapViewController {
+            mapVC.userSelectedLocation = (viewModel.lastSearchedLocation ?? viewModel.userLocation)?.coordinates
+        }
+    }
+
+    @IBAction func cancelMapScreen(_ sender: UIStoryboardSegue) { }
+    @IBAction func fetchFromMapScreen(_ sender: UIStoryboardSegue) {
+        guard let mapVC = sender.source as? MapViewController else { return }
+
+        if let location = mapVC.userSelectedLocation {
+            fetchViewModel(for: .byCoordinates(latitude: location.latitude, longitude: location.longitude))
+        }
+    }
 }
 
 extension ViewController: UITextFieldDelegate {
@@ -84,7 +110,6 @@ extension ViewController: UITextFieldDelegate {
             return
         }
         var searchMode: WeatherSearchParameters? = nil
-        // TODO: Implement support for inline country code detection
         // parse the text
         if let _ = text.rangeOfCharacter(from: .letters) {
             searchMode = .byCityName(cityName: text)

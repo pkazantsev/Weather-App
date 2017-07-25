@@ -69,7 +69,7 @@ final class WeatherAPI {
         self.apiKey = apiKey
     }
 
-    func fetch(byCityName cityName: String, countryCode: String) -> Promise<Weather> {
+    func fetch(byCityName cityName: String, countryCode: String? = nil) -> Promise<Weather> {
         let url = Endpoints.byCityName(cityName: cityName, countryCode: countryCode).asUrl(withApiKey: apiKey)
         return fetch(fromURL: url)
     }

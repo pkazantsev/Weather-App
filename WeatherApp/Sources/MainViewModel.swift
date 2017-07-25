@@ -64,6 +64,7 @@ struct MainViewModel {
 
     /// Automatically detected user location
     var userLocation: UserLocation?
+    var lastSearchedLocation: UserLocation?
 
     /// Country set by user
     var countryCode: String?
@@ -99,11 +100,7 @@ struct MainViewModel {
         let fetchPromise: Promise<Weather>
         switch searchParams {
         case let .byCityName(cityName):
-            if let countryCode = fetchCountryCode {
-                fetchPromise = api.fetch(byCityName: cityName, countryCode: countryCode)
-            } else {
-                return Promise(error: WeatherViewModelFetchError.countryCodeUnknown)
-            }
+            fetchPromise = api.fetch(byCityName: cityName, countryCode: fetchCountryCode)
         case let .byZipCode(zipCode):
             if let countryCode = fetchCountryCode {
                 fetchPromise = api.fetch(byZipCode: zipCode, countryCode: countryCode)
@@ -190,7 +187,7 @@ private let windDirectionsArray = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "S
 struct WeatherViewModel {
 
     private let api: WeatherAPI
-    private let weather: Weather
+    let weather: Weather
 
     var temperature: String {
         return String(format: "%.0-1f°", weather.main.temperature)
@@ -206,6 +203,13 @@ struct WeatherViewModel {
     }
     var countryCode: String {
         return weather.countryName
+    }
+
+    var locationDetails: UserLocation {
+        return UserLocation(cityName: weather.cityName,
+                            countryName: weather.countryName,
+                            countryCode: weather.countryName,
+                            coordinates: weather.coordinates)
     }
 
     init(api: WeatherAPI, weather: Weather) {
