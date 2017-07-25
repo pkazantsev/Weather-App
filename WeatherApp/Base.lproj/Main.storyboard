@@ -25,11 +25,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a city name or zip code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EV4-Uv-HCc">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a city name or zip code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EV4-Uv-HCc">
                                 <rect key="frame" x="56.5" y="28" width="262.5" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue"/>
+                                <connections>
+                                    <outlet property="delegate" destination="e7e-80-ygt" id="trK-GR-TgR"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="48°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avS-WY-q3I" userLabel="Temperature Label">
                                 <rect key="frame" x="170.5" y="140" width="188.5" height="153"/>
@@ -61,41 +64,62 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaT-cq-J5N" userLabel="Location Label">
-                                <rect key="frame" x="20" y="103" width="335" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaT-cq-J5N" userLabel="Location Label">
+                                <rect key="frame" x="20" y="103" width="299" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLl-db-ChU">
+                                <rect key="frame" x="327" y="105" width="24" height="24"/>
+                                <state key="normal" image="LocationIcon"/>
+                                <connections>
+                                    <action selector="fetchForCurrentLocation:" destination="e7e-80-ygt" eventType="touchUpInside" id="xiY-Ln-Nn8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="avS-WY-q3I" firstAttribute="top" secondItem="gaT-cq-J5N" secondAttribute="bottom" constant="8" id="1A8-DV-CiQ"/>
+                            <constraint firstItem="pLl-db-ChU" firstAttribute="centerY" secondItem="gaT-cq-J5N" secondAttribute="centerY" id="54i-JV-o4F"/>
                             <constraint firstItem="avS-WY-q3I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DhI-DS-fpl" secondAttribute="trailing" constant="8" id="5Vk-kE-a3F"/>
                             <constraint firstItem="EV4-Uv-HCc" firstAttribute="top" secondItem="JPj-du-6Cu" secondAttribute="bottom" constant="8" id="AIP-kD-clS"/>
+                            <constraint firstItem="pLl-db-ChU" firstAttribute="leading" secondItem="gaT-cq-J5N" secondAttribute="trailing" constant="8" symbolic="YES" id="GZv-EH-4fh"/>
                             <constraint firstItem="gaT-cq-J5N" firstAttribute="leading" secondItem="dbr-DP-KPJ" secondAttribute="leading" constant="20" symbolic="YES" id="Jmf-VL-3WV"/>
                             <constraint firstItem="avS-WY-q3I" firstAttribute="top" secondItem="JPj-du-6Cu" secondAttribute="bottom" constant="120" id="LOq-rd-1ry"/>
                             <constraint firstItem="EV4-Uv-HCc" firstAttribute="width" secondItem="dbr-DP-KPJ" secondAttribute="width" multiplier="0.7" id="Lc0-2q-hgT"/>
                             <constraint firstItem="EV4-Uv-HCc" firstAttribute="centerX" secondItem="dbr-DP-KPJ" secondAttribute="centerX" id="RdI-Na-SqI"/>
                             <constraint firstItem="DhI-DS-fpl" firstAttribute="leading" secondItem="dbr-DP-KPJ" secondAttribute="leadingMargin" id="S7R-za-zPg"/>
-                            <constraint firstAttribute="trailing" secondItem="gaT-cq-J5N" secondAttribute="trailing" constant="20" symbolic="YES" id="VpZ-pV-mUe"/>
                             <constraint firstItem="avS-WY-q3I" firstAttribute="trailing" secondItem="dbr-DP-KPJ" secondAttribute="trailingMargin" id="a2w-I8-oLy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pLl-db-ChU" secondAttribute="trailing" constant="8" id="gW2-kN-6eS"/>
                             <constraint firstItem="avS-WY-q3I" firstAttribute="firstBaseline" secondItem="DhI-DS-fpl" secondAttribute="baseline" id="lF8-v8-OqY"/>
                         </constraints>
                         <connections>
                             <outlet property="conditionsImageView" destination="48Y-5p-H0O" id="CEH-eT-WKG"/>
+                            <outlet property="currentLocationButton" destination="pLl-db-ChU" id="VKd-IU-Ycp"/>
                             <outlet property="locationLabel" destination="gaT-cq-J5N" id="etU-i2-Deh"/>
+                            <outlet property="searchTextField" destination="EV4-Uv-HCc" id="Pnf-3a-B7p"/>
                             <outlet property="temperatureLabel" destination="avS-WY-q3I" id="QE5-j6-iQ4"/>
                             <outlet property="windSpeedLabel" destination="mfk-AF-RsG" id="Z0B-JC-fea"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="countrySelectButton" destination="e55-ZP-zKM" id="9Nt-gI-4fR"/>
                         <outlet property="mainView" destination="dbr-DP-KPJ" id="vs5-f0-djw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bif-2V-7In" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e55-ZP-zKM">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                    <state key="normal" title="US"/>
+                </button>
             </objects>
             <point key="canvasLocation" x="-292" y="187.55622188905548"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LocationIcon" width="24" height="24"/>
+    </resources>
 </document>

@@ -10,10 +10,21 @@ import UIKit
 
 class MainView: UIView {
 
+    @IBOutlet weak var searchTextField: UITextField!
+
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var conditionsImageView: UIImageView!
     @IBOutlet weak var windSpeedLabel: UILabel!
+
+    @IBOutlet weak var currentLocationButton: UIButton!
+
+    var countrySelectButton: UIButton! {
+        didSet {
+            countrySelectButton?.setTitle("--", for: .normal)
+            searchTextField.rightView = countrySelectButton
+        }
+    }
 
     var viewModel: WeatherViewModel? {
         didSet {
@@ -28,12 +39,15 @@ class MainView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         clear()
+        searchTextField.rightViewMode = .always
+        searchTextField.rightView = countrySelectButton
     }
 
     private func populate(with viewModel: WeatherViewModel) {
-        self.temperatureLabel.text = viewModel.temperature
-        self.windSpeedLabel.text = viewModel.windDirection + " " + viewModel.windSpeed
-        self.locationLabel.text = viewModel.location
+        temperatureLabel.text = viewModel.temperature
+        windSpeedLabel.text = viewModel.windDirection + " " + viewModel.windSpeed
+        locationLabel.text = viewModel.location
+        countrySelectButton.setTitle(viewModel.countryCode, for: .normal)
 
         viewModel.loadConditionsImage { [weak self] image in
             // TODO: Check that the image still relevant
@@ -45,6 +59,8 @@ class MainView: UIView {
         temperatureLabel.text = " -- "
         conditionsImageView.image = nil
         windSpeedLabel.text = "--"
+        locationLabel.text = ". . ."
+        countrySelectButton?.setTitle("--", for: .normal)
     }
 
 }

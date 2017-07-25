@@ -34,6 +34,7 @@ enum NetworkHelperError: Error, CustomStringConvertible {
 class NetworkHelperImpl: NetworkHelper {
 
     func fetchJson(from url: URL) -> Promise<JSONObject> {
+        dlog("Loading from '\(url)'")
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         return Promise { (callback, failure) in
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in

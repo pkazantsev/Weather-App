@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Marshal
 import PromiseKit
 
 typealias WeatherApiKey = String
@@ -17,6 +18,9 @@ private let conditionImageUrl = "http://openweathermap.org/img/w/{imageCode}.png
 
 enum WeatherAPIError: Error {
     case incorrectWeatherImageCode
+    case cityNotFound
+    case unknownApiError
+    case other(Error)
 }
 
 private enum Endpoints {
@@ -67,23 +71,17 @@ final class WeatherAPI {
 
     func fetch(byCityName cityName: String, countryCode: String) -> Promise<Weather> {
         let url = Endpoints.byCityName(cityName: cityName, countryCode: countryCode).asUrl(withApiKey: apiKey)
-        return network
-            .fetchJson(from: url)
-            .then { try Weather(object: $0) }
+        return fetch(fromURL: url)
     }
 
     func fetch(byLatitute latitude: Double, longitue: Double) -> Promise<Weather> {
         let url = Endpoints.byCoordinates(latitude: latitude, longitude: longitue).asUrl(withApiKey: apiKey)
-        return network
-            .fetchJson(from: url)
-            .then { try Weather(object: $0) }
+        return fetch(fromURL: url)
     }
 
     func fetch(byZipCode zipCode: Int, countryCode: String) -> Promise<Weather> {
         let url = Endpoints.byZipCode(zip: zipCode, countryCode: countryCode).asUrl(withApiKey: apiKey)
-        return network
-            .fetchJson(from: url)
-            .then { try Weather(object: $0) }
+        return fetch(fromURL: url)
     }
 
     func loadConditionsImage(withName imageName: String) -> Promise<UIImage> {
@@ -92,6 +90,28 @@ final class WeatherAPI {
         }
         return network
             .loadImage(from: url)
+    }
+
+    private func fetch(fromURL url: URL) -> Promise<Weather> {
+        return network
+            .fetchJson(from: url)
+            .then { obj -> JSONObject in
+                let statusCode: Int
+                if let code: String = try? obj.value(for: "cod") {
+                    // In case of error it is String
+                    statusCode = Int(code)!
+                } else {
+                    // In normal case it is Int
+                    statusCode = try obj.value(for: "cod")
+                }
+                if statusCode == 404 {
+                    throw WeatherAPIError.cityNotFound
+                } else if statusCode != 200 {
+                    throw WeatherAPIError.unknownApiError
+                }
+                return obj
+            }
+            .then { try Weather(object: $0) }
     }
 
 }

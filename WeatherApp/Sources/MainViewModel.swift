@@ -199,19 +199,13 @@ struct WeatherViewModel {
         return String(format: "%.0-1f m/s", weather.wind.speed)
     }
     var windDirection: String {
-        let directionIndex: Int
-        if weather.wind.direction >= 348.75 {
-            directionIndex = 0
-        } else {
-            directionIndex = Int((weather.wind.direction + 11.25) / 15)
-            if directionIndex >= windDirectionsArray.count {
-                return "UNK"
-            }
-        }
-        return windDirectionsArray[directionIndex]
+        return WeatherViewModel.windDirectionCode(from: weather.wind.direction)
     }
     var location: String {
         return "\(weather.cityName), \(weather.countryName)"
+    }
+    var countryCode: String {
+        return weather.countryName
     }
 
     init(api: WeatherAPI, weather: Weather) {
@@ -225,6 +219,19 @@ struct WeatherViewModel {
         }.recover { _ in
             callback(#imageLiteral(resourceName: "NoWeatherIcon"))
         }.always {}
+    }
+
+    static func windDirectionCode(from direction: Double) -> String {
+        let directionIndex: Int
+        if direction >= 348.75 {
+            directionIndex = 0
+        } else {
+            directionIndex = Int((direction + 11.25) / 22.5)
+            if directionIndex >= windDirectionsArray.count {
+                return "UNK"
+            }
+        }
+        return windDirectionsArray[directionIndex]
     }
 
 }
