@@ -8,12 +8,18 @@
 
 import UIKit
 
+private let openWeatherMapKey = "7527cc5c5007edd969f935e4363be1b5"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var api: WeatherAPI!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        api = WeatherAPI(network: NetworkHelperImpl(), apiKey: openWeatherMapKey)
+
         return true
     }
 

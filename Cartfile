@@ -1,0 +1,4 @@
+
+github "mxcl/PromiseKit" ~> 4.0
+github "utahiosmac/Marshal"
+github "nschum/SwiftHamcrest"
