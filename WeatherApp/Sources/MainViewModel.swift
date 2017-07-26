@@ -41,11 +41,16 @@ enum LocationDetectionError: Error, CustomStringConvertible {
     }
 }
 
-struct UserLocation {
+struct UserLocation: Equatable {
     let cityName: String
     let countryName: String
     let countryCode: String
     let coordinates: Coordinates
+
+    static func ==(lhs: UserLocation, rhs: UserLocation) -> Bool {
+        return lhs.cityName == rhs.cityName &&
+                lhs.countryCode == rhs.countryCode
+    }
 }
 
 class UserLocationDetectionToken {
@@ -119,6 +124,17 @@ struct MainViewModel {
         return fetchPromise.then {
             return WeatherViewModel(api: self.api, weather: $0)
         }
+    }
+
+    static func searchPatametersFromRequest(_ request: String) -> WeatherSearchParameters? {
+        var searchMode: WeatherSearchParameters? = nil
+        // parse the text
+        if let _ = request.rangeOfCharacter(from: .letters) {
+            searchMode = .byCityName(cityName: request)
+        } else if let zipCode = Int(request) {
+            searchMode = .byZipCode(zipCode: zipCode)
+        }
+        return searchMode
     }
 
 }

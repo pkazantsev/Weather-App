@@ -19,6 +19,8 @@ class ViewController: UIViewController {
 
     private var locationDelectionToken: UserLocationDetectionToken?
 
+    private var searchHistoryViewController: SearchHistoryViewController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,12 +35,13 @@ class ViewController: UIViewController {
             print("Location detected: \(location)")
             self?.locationDetected(location)
 
-
         }) { [weak self] error in
             dlog("Location detection error: \(error)")
             // Present the error to ther user
             self?.locationDelectionToken = nil
         }
+
+        fetchForLastSearch()
     }
 
     private func locationDetected(_ location: UserLocation) {
@@ -50,15 +53,21 @@ class ViewController: UIViewController {
         }
     }
 
+    private func fetchForLastSearch() {
+        guard let lastSearch = searchHistoryViewController?.lastSearch else { return }
+
+        fetchViewModel(for: .byCoordinates(latitude: lastSearch.coordinates.latitude, longitude: lastSearch.coordinates.longitude), fromHistory: true)
+    }
+
     @IBAction func fetchForCurrentLocation(_ sender: UIButton) {
         fetchViewModel(for: .currentLocation)
     }
 
-    fileprivate func fetchViewModel(for mode: WeatherSearchParameters) {
+    fileprivate func fetchViewModel(for mode: WeatherSearchParameters, fromHistory: Bool = false) {
         viewModel.weatherViewModel(for: mode)
             .then { weatherViewModel -> Void in
                 dlog("Weather fetched: \(weatherViewModel)")
-                self.updateWith(viewModel: weatherViewModel)
+                self.updateWith(viewModel: weatherViewModel, fromHistory: fromHistory)
             }.catch { error in
                 dlog("Weather fetching error: \(error)")
                 if let err = error as? WeatherAPIError, case .cityNotFound = err {
@@ -67,10 +76,13 @@ class ViewController: UIViewController {
             }
     }
 
-    private func updateWith(viewModel vm: WeatherViewModel) {
+    private func updateWith(viewModel vm: WeatherViewModel, fromHistory: Bool) {
         mainView.viewModel = vm
         viewModel.countryCode = vm.countryCode.lowercased()
         viewModel.lastSearchedLocation = vm.locationDetails
+        if !fromHistory {
+            searchHistoryViewController?.addSearchHistoryRow(vm.locationDetails)
+        }
     }
 
     private func showError(title: String? = nil, message: String? = nil) {
@@ -85,7 +97,14 @@ class ViewController: UIViewController {
             let navVC = segue.destination as? UINavigationController,
             let mapVC = navVC.topViewController as? MapViewController {
             mapVC.userSelectedLocation = (viewModel.lastSearchedLocation ?? viewModel.userLocation)?.coordinates
+        } else if segue.identifier == "EmbedSearchHistoryIdentifier",
+            let searchVC = segue.destination as? SearchHistoryViewController {
+            searchHistoryViewController = searchVC
+            searchVC.onRowSelection = { [weak self] location in
+                self?.fetchViewModel(for: .byCoordinates(latitude: location.coordinates.latitude, longitude: location.coordinates.longitude), fromHistory: true)
+            }
         }
+
     }
 
     @IBAction func cancelMapScreen(_ sender: UIStoryboardSegue) { }
@@ -109,15 +128,8 @@ extension ViewController: UITextFieldDelegate {
         guard let text = textField.text, text.characters.count > 0 else {
             return
         }
-        var searchMode: WeatherSearchParameters? = nil
-        // parse the text
-        if let _ = text.rangeOfCharacter(from: .letters) {
-            searchMode = .byCityName(cityName: text)
-        } else if let zipCode = Int(text) {
-            searchMode = .byZipCode(zipCode: zipCode)
-        }
 
-        if let mode = searchMode {
+        if let mode = MainViewModel.searchPatametersFromRequest(text) {
             fetchViewModel(for: mode)
         }
     }

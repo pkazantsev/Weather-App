@@ -32,6 +32,7 @@
 		C849B5111F17138D00BC7835 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C849B5101F17138D00BC7835 /* Assets.xcassets */; };
 		C849B5141F17138D00BC7835 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C849B5121F17138D00BC7835 /* LaunchScreen.storyboard */; };
 		C87B1FEA1F27717E001A4C1D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87B1FE91F27717E001A4C1D /* MapViewController.swift */; };
+		C87B1FEC1F2894B5001A4C1D /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87B1FEB1F2894B5001A4C1D /* SearchHistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		C849B51A1F17138E00BC7835 /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C849B5201F17138E00BC7835 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C87B1FE91F27717E001A4C1D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		C87B1FEB1F2894B5001A4C1D /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				C849B50B1F17138D00BC7835 /* ViewController.swift */,
 				C846C6831F27059F00C38A03 /* MainViewModel.swift */,
 				C87B1FE91F27717E001A4C1D /* MapViewController.swift */,
+				C87B1FEB1F2894B5001A4C1D /* SearchHistoryViewController.swift */,
 				C846C6821F27059F00C38A03 /* Helpers.swift */,
 			);
 			path = Sources;
@@ -333,6 +336,7 @@
 				C87B1FEA1F27717E001A4C1D /* MapViewController.swift in Sources */,
 				C849B50C1F17138D00BC7835 /* ViewController.swift in Sources */,
 				C846C6671F26550B00C38A03 /* Weather.swift in Sources */,
+				C87B1FEC1F2894B5001A4C1D /* SearchHistoryViewController.swift in Sources */,
 				C846C6681F26550B00C38A03 /* API.swift in Sources */,
 				C849B50A1F17138D00BC7835 /* AppDelegate.swift in Sources */,
 			);
