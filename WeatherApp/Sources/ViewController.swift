@@ -71,7 +71,7 @@ class ViewController: UIViewController {
             }.catch { error in
                 dlog("Weather fetching error: \(error)")
                 if let err = error as? WeatherAPIError, case .cityNotFound = err {
-                    self.showError(title: "City not found")
+                    self.presentError(title: "City not found")
                 }
             }
     }
@@ -79,14 +79,13 @@ class ViewController: UIViewController {
     private func updateWith(viewModel vm: WeatherViewModel, fromHistory: Bool) {
         mainView.viewModel = vm
         viewModel.countryCode = vm.countryCode.lowercased()
-        viewModel.lastSearchedLocation = vm.locationDetails
         if !fromHistory {
             searchHistoryViewController?.addSearchHistoryRow(vm.locationDetails)
         }
     }
 
-    private func showError(title: String? = nil, message: String? = nil) {
-        let alert = UIAlertController(title: "Error", message: "City not found", preferredStyle: .alert)
+    private func presentError(title: String? = nil, message: String? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
@@ -96,7 +95,7 @@ class ViewController: UIViewController {
         if segue.identifier == "OpenMapScreenIdentifier",
             let navVC = segue.destination as? UINavigationController,
             let mapVC = navVC.topViewController as? MapViewController {
-            mapVC.userSelectedLocation = (viewModel.lastSearchedLocation ?? viewModel.userLocation)?.coordinates
+            mapVC.userSelectedLocation = (searchHistoryViewController?.lastSearch ?? viewModel.userLocation)?.coordinates
         } else if segue.identifier == "EmbedSearchHistoryIdentifier",
             let searchVC = segue.destination as? SearchHistoryViewController {
             searchHistoryViewController = searchVC
@@ -107,7 +106,9 @@ class ViewController: UIViewController {
 
     }
 
+    /// Close Map Screen without saving a selected location
     @IBAction func cancelMapScreen(_ sender: UIStoryboardSegue) { }
+    /// Closing Map Screen with passing a selected location
     @IBAction func fetchFromMapScreen(_ sender: UIStoryboardSegue) {
         guard let mapVC = sender.source as? MapViewController else { return }
 

@@ -19,7 +19,7 @@ enum WeatherSearchParameters {
 
 enum WeatherViewModelFetchError: Error {
     case countryCodeUnknown
-    case userLocationUnawailable
+    case userLocationUnavailable
 }
 enum LocationDetectionError: Error, CustomStringConvertible {
     case notEnoughData
@@ -69,7 +69,6 @@ struct MainViewModel {
 
     /// Automatically detected user location
     var userLocation: UserLocation?
-    var lastSearchedLocation: UserLocation?
 
     /// Country set by user
     var countryCode: String?
@@ -118,7 +117,7 @@ struct MainViewModel {
             if let location = userLocation?.coordinates {
                 fetchPromise = api.fetch(byLatitute: location.latitude, longitue: location.longitude)
             } else {
-                return Promise(error: WeatherViewModelFetchError.userLocationUnawailable)
+                return Promise(error: WeatherViewModelFetchError.userLocationUnavailable)
             }
         }
         return fetchPromise.then {
@@ -199,6 +198,12 @@ private class MainViewModelLocationDelegate: NSObject, CLLocationManagerDelegate
 }
 
 private let windDirectionsArray = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+private let decimalFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.minimumFractionDigits = 0
+    formatter.maximumFractionDigits = 1
+    return formatter
+}()
 
 struct WeatherViewModel {
 
@@ -206,10 +211,18 @@ struct WeatherViewModel {
     let weather: Weather
 
     var temperature: String {
-        return String(format: "%.0-1f°", weather.main.temperature)
+        if let num = decimalFormatter.string(from: weather.main.temperature as NSNumber) {
+            return "\(num)°"
+        } else {
+            return ""
+        }
     }
     var windSpeed: String {
-        return String(format: "%.0-1f m/s", weather.wind.speed)
+        if let num = decimalFormatter.string(from: weather.wind.speed as NSNumber) {
+            return "\(num) m/s"
+        } else {
+            return ""
+        }
     }
     var windDirection: String {
         return WeatherViewModel.windDirectionCode(from: weather.wind.direction)

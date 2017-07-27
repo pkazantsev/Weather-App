@@ -70,6 +70,10 @@ class SearchHistoryViewController: UITableViewController {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let historyFileUrl = docs.appendingPathComponent(historyFileName)
 
+        if searchHistory.isEmpty {
+            try? FileManager.default.removeItem(at: historyFileUrl)
+        }
+
         let dataToSave = searchHistory.map { location -> [String: AnyObject] in
             return ["city_name": location.cityName as NSString,
                     "country_name": location.countryName as NSString,

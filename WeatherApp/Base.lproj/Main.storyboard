@@ -35,13 +35,13 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="48°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avS-WY-q3I" userLabel="Temperature Label">
-                                <rect key="frame" x="170.5" y="140" width="188.5" height="153"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="128"/>
+                                <rect key="frame" x="182" y="140" width="177" height="143.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="120"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="DhI-DS-fpl">
-                                <rect key="frame" x="16" y="165.5" width="139" height="96.5"/>
+                                <rect key="frame" x="16" y="158" width="139" height="96.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RU9-WU-aiI" userLabel="Wind Direction Label">
                                         <rect key="frame" x="0.0" y="0.0" width="39.5" height="18"/>
@@ -85,7 +85,7 @@
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vsc-1L-5ps">
-                                <rect key="frame" x="16" y="301" width="343" height="358"/>
+                                <rect key="frame" x="16" y="291.5" width="343" height="367.5"/>
                                 <connections>
                                     <segue destination="Wcc-wl-wKs" kind="embed" identifier="EmbedSearchHistoryIdentifier" id="fV3-bZ-Q43"/>
                                 </connections>
@@ -128,11 +128,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bif-2V-7In" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e55-ZP-zKM">
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e55-ZP-zKM" userLabel="Country Select Button">
                     <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                    <state key="normal" title="US"/>
+                    <state key="normal" title="--"/>
                 </button>
             </objects>
             <point key="canvasLocation" x="-292" y="187.55622188905548"/>
@@ -197,7 +197,7 @@
             <objects>
                 <tableViewController id="Wcc-wl-wKs" customClass="SearchHistoryViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="sF4-Gl-R6h">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="358"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="367.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
