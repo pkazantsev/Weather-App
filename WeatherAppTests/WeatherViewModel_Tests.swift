@@ -90,6 +90,44 @@ class WeatherViewModel_Tests: XCTestCase {
         assertThat(model.windSpeed, equalTo("7 m/s"))
     }
 
+    func testLocation() {
+        let api = stubApi()
+
+        var weather = makeWeather(cityName: "Kiyv", countryName: "UA")
+        var model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.location, equalTo("Kiyv, UA"))
+
+        weather = makeWeather(cityName: "Gdynia", countryName: "PL")
+        model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.location, equalTo("Gdynia, PL"))
+    }
+
+    func testLoadConditionsImageSuccess() {
+        let api = stubApi(imageName: "10n")
+        let exp = expectation(description: "Icon should be loaded")
+
+        let weather = makeWeather(iconId: "10n")
+        let model = WeatherViewModel(api: api, weather: weather)
+        model.loadConditionsImage { image in
+            exp.fulfill()
+            XCTAssert(image == UIImage(named: "10n", in: Bundle(for: WeatherViewModel_Tests.self), compatibleWith: nil))
+        }
+        waitForExpectations(timeout: 3.0)
+    }
+
+    func testLoadConditionsImageFailure() {
+        let api = stubApi()
+        let exp = expectation(description: "Icon should be loaded")
+
+        let weather = makeWeather(iconId: "0k")
+        let model = WeatherViewModel(api: api, weather: weather)
+        model.loadConditionsImage { image in
+            exp.fulfill()
+            XCTAssert(image == UIImage(named: "NoWeatherIcon", in: Bundle(for: WeatherAPI.self), compatibleWith: nil))
+        }
+        waitForExpectations(timeout: 3.0)
+    }
+
 }
 
 func makeWeather(cityName: String = "City", countryName: String = "Country", latitude: Double = -1, longitude: Double = -1, conditionsId: Int = 1, group: String = "Rain", description: String = "rain", iconId: String = "10d", temperature: Double = 17.23, humidity: Double = 78.2, pressure: Double = 789.6, windSpeed: Double = 3.45, direction: Double = 307.2) -> Weather {

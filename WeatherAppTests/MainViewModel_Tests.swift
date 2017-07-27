@@ -11,7 +11,7 @@ import XCTest
 import Hamcrest
 @testable import WeatherApp
 
-class MainViewModel_Tests: XCTest {
+class MainViewModel_Tests: XCTestCase {
 
     func testSearchParametersFromRequestLetters() {
         let request = "New York"

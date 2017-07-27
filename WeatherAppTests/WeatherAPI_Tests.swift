@@ -84,10 +84,10 @@ class WeatherAPI_Tests: XCTestCase {
                 "main": ["temperature" : 0.0, "humidity": 100.0, "pressure": 986.0],
                 "wind": ["speed": 13.9, "direction": 230.0],
                 "coordinates": ["latitude": -54.8, "longitude": -68.3]])
-            }.catch { error in
-                XCTFail("fetching error: \(error)")
-            }.always {
-                exp.fulfill()
+        }.catch { error in
+            XCTFail("fetching error: \(error)")
+        }.always {
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 3.0)

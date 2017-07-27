@@ -23,17 +23,18 @@
 		C846C67E1F26E7B800C38A03 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C846C6761F26E76F00C38A03 /* PromiseKit.framework */; };
 		C846C6811F26E7B800C38A03 /* Hamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C846C6801F26E7B800C38A03 /* Hamcrest.framework */; };
 		C846C6861F27059F00C38A03 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6821F27059F00C38A03 /* Helpers.swift */; };
-		C846C6871F27059F00C38A03 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6831F27059F00C38A03 /* MainViewModel.swift */; };
 		C846C6881F27059F00C38A03 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6851F27059F00C38A03 /* MainView.swift */; };
 		C846C68A1F27080600C38A03 /* WeatherViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C846C6891F27080600C38A03 /* WeatherViewModel_Tests.swift */; };
 		C849B50A1F17138D00BC7835 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849B5091F17138D00BC7835 /* AppDelegate.swift */; };
-		C849B50C1F17138D00BC7835 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849B50B1F17138D00BC7835 /* ViewController.swift */; };
 		C849B50F1F17138D00BC7835 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C849B50D1F17138D00BC7835 /* Main.storyboard */; };
 		C849B5111F17138D00BC7835 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C849B5101F17138D00BC7835 /* Assets.xcassets */; };
 		C849B5141F17138D00BC7835 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C849B5121F17138D00BC7835 /* LaunchScreen.storyboard */; };
 		C874090E1F2A26D2000383AC /* MainViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874090D1F2A26D2000383AC /* MainViewModel_Tests.swift */; };
-		C87B1FEA1F27717E001A4C1D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87B1FE91F27717E001A4C1D /* MapViewController.swift */; };
-		C87B1FEC1F2894B5001A4C1D /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87B1FEB1F2894B5001A4C1D /* SearchHistoryViewController.swift */; };
+		C87409141F2A277B000383AC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87409101F2A277B000383AC /* MainViewModel.swift */; };
+		C87409151F2A277B000383AC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87409111F2A277B000383AC /* MapViewController.swift */; };
+		C87409161F2A277B000383AC /* SearchHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87409121F2A277B000383AC /* SearchHistoryViewController.swift */; };
+		C87409171F2A277B000383AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87409131F2A277B000383AC /* ViewController.swift */; };
+		C87409191F2A27B4000383AC /* 10n.png in Resources */ = {isa = PBXBuildFile; fileRef = C87409181F2A27B4000383AC /* 10n.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,12 +75,10 @@
 		C846C6761F26E76F00C38A03 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = ../Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		C846C6801F26E7B800C38A03 /* Hamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hamcrest.framework; path = Carthage/Build/iOS/Hamcrest.framework; sourceTree = "<group>"; };
 		C846C6821F27059F00C38A03 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		C846C6831F27059F00C38A03 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C846C6851F27059F00C38A03 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C846C6891F27080600C38A03 /* WeatherViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewModel_Tests.swift; sourceTree = "<group>"; };
 		C849B5061F17138D00BC7835 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C849B5091F17138D00BC7835 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C849B50B1F17138D00BC7835 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C849B50E1F17138D00BC7835 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C849B5101F17138D00BC7835 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C849B5131F17138D00BC7835 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,8 +86,11 @@
 		C849B51A1F17138E00BC7835 /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C849B5201F17138E00BC7835 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C874090D1F2A26D2000383AC /* MainViewModel_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel_Tests.swift; sourceTree = "<group>"; };
-		C87B1FE91F27717E001A4C1D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		C87B1FEB1F2894B5001A4C1D /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
+		C87409101F2A277B000383AC /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		C87409111F2A277B000383AC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		C87409121F2A277B000383AC /* SearchHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryViewController.swift; sourceTree = "<group>"; };
+		C87409131F2A277B000383AC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C87409181F2A27B4000383AC /* 10n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10n.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		C846C66A1F26552C00C38A03 /* Test Data */ = {
 			isa = PBXGroup;
 			children = (
+				C87409181F2A27B4000383AC /* 10n.png */,
 				C846C66B1F26552C00C38A03 /* weather_coordinates_-54.8,-68.3.json */,
 				C846C66C1F26552C00C38A03 /* weather_name_NewYork.json */,
 				C846C66D1F26552C00C38A03 /* weather_zip_9016nz.json */,
@@ -214,17 +217,25 @@
 		C849B5331F17407000BC7835 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C874090F1F2A277B000383AC /* Controllers */,
 				C846C6621F26550B00C38A03 /* Model */,
 				C846C6641F26550B00C38A03 /* Service */,
 				C846C6841F27059F00C38A03 /* Views */,
 				C849B5091F17138D00BC7835 /* AppDelegate.swift */,
-				C849B50B1F17138D00BC7835 /* ViewController.swift */,
-				C846C6831F27059F00C38A03 /* MainViewModel.swift */,
-				C87B1FE91F27717E001A4C1D /* MapViewController.swift */,
-				C87B1FEB1F2894B5001A4C1D /* SearchHistoryViewController.swift */,
 				C846C6821F27059F00C38A03 /* Helpers.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		C874090F1F2A277B000383AC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C87409101F2A277B000383AC /* MainViewModel.swift */,
+				C87409111F2A277B000383AC /* MapViewController.swift */,
+				C87409121F2A277B000383AC /* SearchHistoryViewController.swift */,
+				C87409131F2A277B000383AC /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C846C6721F26552C00C38A03 /* weather_zip_9016nz.json in Resources */,
+				C87409191F2A27B4000383AC /* 10n.png in Resources */,
 				C846C6701F26552C00C38A03 /* weather_coordinates_-54.8,-68.3.json in Resources */,
 				C846C6711F26552C00C38A03 /* weather_name_NewYork.json in Resources */,
 			);
@@ -332,16 +344,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C846C6871F27059F00C38A03 /* MainViewModel.swift in Sources */,
+				C87409171F2A277B000383AC /* ViewController.swift in Sources */,
+				C87409141F2A277B000383AC /* MainViewModel.swift in Sources */,
 				C846C6881F27059F00C38A03 /* MainView.swift in Sources */,
 				C846C6691F26550B00C38A03 /* Network.swift in Sources */,
 				C846C6861F27059F00C38A03 /* Helpers.swift in Sources */,
-				C87B1FEA1F27717E001A4C1D /* MapViewController.swift in Sources */,
-				C849B50C1F17138D00BC7835 /* ViewController.swift in Sources */,
 				C846C6671F26550B00C38A03 /* Weather.swift in Sources */,
-				C87B1FEC1F2894B5001A4C1D /* SearchHistoryViewController.swift in Sources */,
 				C846C6681F26550B00C38A03 /* API.swift in Sources */,
 				C849B50A1F17138D00BC7835 /* AppDelegate.swift in Sources */,
+				C87409161F2A277B000383AC /* SearchHistoryViewController.swift in Sources */,
+				C87409151F2A277B000383AC /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

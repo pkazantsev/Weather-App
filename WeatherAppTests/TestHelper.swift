@@ -78,7 +78,10 @@ func assert(_ actual: Weather, _ expected: [String: Any], _ file: StaticString =
 // MARK: Mocks
 
 func stubApi() -> WeatherAPI {
-    return WeatherAPI(network: TestsNetworkHelper(withFileName: "", targetUrl: URL(string: "https://example.com")!, apiKey: "1234"), apiKey: "1234")
+    return WeatherAPI(network: StubNetworkHelper(), apiKey: "1234")
+}
+func stubApi(imageName: String) -> WeatherAPI {
+    return WeatherAPI(network: ImageLoadingNetworkHelper(withImageName: imageName), apiKey: "1234")
 }
 
 class TestsNetworkHelper: NetworkHelper {
@@ -109,5 +112,30 @@ class TestsNetworkHelper: NetworkHelper {
 
     func loadImage(from url: URL) -> Promise<UIImage> {
         return Promise(error: "Not Implemented Yet")
+    }
+}
+
+class StubNetworkHelper: NetworkHelper {
+    func fetchJson(from url: URL) -> Promise<JSONObject> {
+        return Promise(error: "Not Implemented Yet")
+    }
+    func loadImage(from url: URL) -> Promise<UIImage> {
+        return Promise(error: "Not Implemented Yet")
+    }
+}
+
+class ImageLoadingNetworkHelper: NetworkHelper {
+    let testImageName: String
+
+    init(withImageName imageName: String) {
+        testImageName = imageName
+    }
+
+    func fetchJson(from url: URL) -> Promise<JSONObject> {
+        return Promise(error: "Not Implemented Yet")
+    }
+
+    func loadImage(from url: URL) -> Promise<UIImage> {
+        return Promise(value: UIImage(named: testImageName, in: Bundle(for: ImageLoadingNetworkHelper.self), compatibleWith: nil)!)
     }
 }

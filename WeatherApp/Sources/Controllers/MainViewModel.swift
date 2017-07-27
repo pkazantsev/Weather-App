@@ -211,18 +211,10 @@ struct WeatherViewModel {
     let weather: Weather
 
     var temperature: String {
-        if let num = decimalFormatter.string(from: weather.main.temperature as NSNumber) {
-            return "\(num)°"
-        } else {
-            return ""
-        }
+        return decimalFormatter.string(from: weather.main.temperature as NSNumber).flatMap { "\($0)°" } ?? ""
     }
     var windSpeed: String {
-        if let num = decimalFormatter.string(from: weather.wind.speed as NSNumber) {
-            return "\(num) m/s"
-        } else {
-            return ""
-        }
+        return decimalFormatter.string(from: weather.wind.speed as NSNumber).flatMap { "\($0) m/s" } ?? ""
     }
     var windDirection: String {
         return WeatherViewModel.windDirectionCode(from: weather.wind.direction)
