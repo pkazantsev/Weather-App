@@ -57,4 +57,47 @@ class WeatherViewModel_Tests: XCTestCase {
         let dirCode3 = WeatherViewModel.windDirectionCode(from: direction3)
         assertThat(dirCode3, equalTo("NNW"))
     }
+
+    func testTemperature() {
+        let api = stubApi()
+
+        var weather = makeWeather(temperature: -23.17)
+        var model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.temperature, equalTo("-23.2°"))
+
+        weather = makeWeather(temperature: -7.0)
+        model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.temperature, equalTo("-7°"))
+
+        weather = makeWeather(temperature: 2.33)
+        model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.temperature, equalTo("2.3°"))
+
+        weather = makeWeather(temperature: 28.79)
+        model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.temperature, equalTo("28.8°"))
+    }
+
+    func testWindSpeed() {
+        let api = stubApi()
+
+        var weather = makeWeather(windSpeed: 3.21)
+        var model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.windSpeed, equalTo("3.2 m/s"))
+
+        weather = makeWeather(windSpeed: 7.0)
+        model = WeatherViewModel(api: api, weather: weather)
+        assertThat(model.windSpeed, equalTo("7 m/s"))
+    }
+
 }
+
+func makeWeather(cityName: String = "City", countryName: String = "Country", latitude: Double = -1, longitude: Double = -1, conditionsId: Int = 1, group: String = "Rain", description: String = "rain", iconId: String = "10d", temperature: Double = 17.23, humidity: Double = 78.2, pressure: Double = 789.6, windSpeed: Double = 3.45, direction: Double = 307.2) -> Weather {
+    return Weather(cityName: cityName,
+                   countryName: countryName,
+                   coordinates: .init(latitude: latitude, longitude: longitude),
+                   conditions: .init(id: conditionsId, group: group, description: description, iconId: iconId),
+                   main: .init(temperature: temperature, humidity: humidity, pressure: pressure),
+                   wind: .init(speed: windSpeed, direction: direction))
+}
+

@@ -77,6 +77,10 @@ func assert(_ actual: Weather, _ expected: [String: Any], _ file: StaticString =
 
 // MARK: Mocks
 
+func stubApi() -> WeatherAPI {
+    return WeatherAPI(network: TestsNetworkHelper(withFileName: "", targetUrl: URL(string: "https://example.com")!, apiKey: "1234"), apiKey: "1234")
+}
+
 class TestsNetworkHelper: NetworkHelper {
     let testFileName: String
     let targetUrl: URL
